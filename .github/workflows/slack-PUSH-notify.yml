@@ -10,7 +10,7 @@ jobs:
   PUSH-Workflow:
     name: Review the PUSH
     runs-on: ubuntu-22.04
-    
+
     steps:
     - name: Send custom JSON data to Slack workflow
       id: slack
@@ -36,6 +36,7 @@ jobs:
           }
       env:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_WEBHOOK_URL }}
+        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
       
         
         
@@ -70,3 +71,4 @@ jobs:
           }
       env:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_WEBHOOK_URL }}
+        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
