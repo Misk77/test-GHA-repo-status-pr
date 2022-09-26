@@ -1,0 +1,72 @@
+name: PUSH - Send notification to slack while updating repo
+
+on:
+  #pull_request:
+  push:
+    branches:
+      - master
+      
+jobs:
+  PR-review:
+    name: Review the PR
+    runs-on: ubuntu-22.04
+    steps:
+
+    - name: Send custom JSON data to Slack workflow
+      id: slack
+      uses: slackapi/slack-github-action@v1.22.0
+      with:
+        channel-id: "C038JK97W1G"
+        payload: |
+          {
+            "text": "Deployment started (In Progress)",
+            "attachments": [
+              {
+                "pretext": "Deployment started",
+                "color": "dbab09",
+                "fields": [
+                  {
+                    "title": "Status",
+                    "short": true,
+                    "value": "In Progress"
+                  }
+                ]
+              }
+            ]
+          }
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_WEBHOOK_URL }}
+      
+        
+        
+    - name: DEPLOY LAB
+      run: | 
+        echo Start stage deployment
+        echo -10 seconds sleep for verify IN PROGRESS output in slack
+        sleep 10
+        echo END stage deployment
+        
+        
+    - uses: slackapi/slack-github-action@v1.22.0
+      with:
+        channel-id: "C038JK97W1G"
+        update-ts: ${{ steps.slack.outputs.ts }}
+        payload: |
+          {
+            "text": "Deployment finished (Completed)",
+            "attachments": [
+              {
+                "pretext": "Deployment finished",
+                "color": "28a745",
+                "fields": [
+                  {
+                    "title": "Status",
+                    "short": true,
+                    "value": "Completed"
+                  }
+                ]
+              }
+            ]
+          }
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_WEBHOOK_URL }}
