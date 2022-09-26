@@ -1,12 +1,11 @@
-name: SEns notification to slack while updating repo
+name: Send notification to slack while updating repo
 
 on:
   pull_request:
-  push:
+  #push:
     branches:
       - master
       
-
 jobs:
   PR-review:
     name: Review the PR
@@ -16,7 +15,6 @@ jobs:
       # - name: post to slack
       #   run: | 
       #    curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' https://hooks.slack.com/services/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
-
 
       - name: Send custom JSON data to Slack workflow
         id: slack
