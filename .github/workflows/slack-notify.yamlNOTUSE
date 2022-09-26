@@ -12,14 +12,6 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      # - name: post to slack
-      #   run: | 
-      #    curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' https://hooks.slack.com/services/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
-
-
-
-
-
       - name: Send custom JSON data to Slack workflow
         id: slack
         uses: slackapi/slack-github-action@v1.18.0
