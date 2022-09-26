@@ -13,23 +13,28 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - name: Send custom JSON data to Slack workflow
-      id: slack
-      uses: slackapi/slack-github-action@v1.18.0
-      with:
-        payload: |
-          {
-            "text": "@Michel PR for Review - GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>",
-            "blocks": [
-            {
-              "type": "section",
-              "text": {
-                "type": "mrkdwn",
-                "text": "@Michel PR for Review GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>"
-              }
-            }
-          ] 
-          }
-      env:
-        SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
-        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+      - name: post to slack
+        run: | 
+         curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' https://hooks.slack.com/services/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
+
+
+    # - name: Send custom JSON data to Slack workflow
+    #   id: slack
+    #   uses: slackapi/slack-github-action@v1.18.0
+    #   with:
+    #     payload: |
+    #       {
+    #         "text": "@Michel PR for Review - GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>",
+    #         "blocks": [
+    #         {
+    #           "type": "section",
+    #           "text": {
+    #             "type": "mrkdwn",
+    #             "text": "@Michel PR for Review GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>"
+    #           }
+    #         }
+    #       ] 
+    #       }
+    #   env:
+    #     SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+    #     SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
