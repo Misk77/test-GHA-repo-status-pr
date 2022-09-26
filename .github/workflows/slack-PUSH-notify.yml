@@ -7,11 +7,11 @@ on:
       - master
       
 jobs:
-  PR-review:
-    name: Review the PR
+  PUSH-Workflow:
+    name: Review the PUSH
     runs-on: ubuntu-22.04
+    
     steps:
-
     - name: Send custom JSON data to Slack workflow
       id: slack
       uses: slackapi/slack-github-action@v1.22.0
