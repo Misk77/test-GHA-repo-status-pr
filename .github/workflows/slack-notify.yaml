@@ -12,10 +12,8 @@ jobs:
     name: Review the PR
     runs-on: ubuntu-22.04
 
-
-
-
-- name: Send custom JSON data to Slack workflow
+    steps:
+    - name: Send custom JSON data to Slack workflow
       id: slack
       uses: slackapi/slack-github-action@v1.18.0
       with:
