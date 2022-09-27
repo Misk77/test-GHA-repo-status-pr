@@ -1,5 +1,11 @@
 This is for testing slack bot with different slack notification.
 ---
 
-BOT needs: 
-Auth for chat_write
+Requires: 
+Auth for chat_write on slack app
+- OAuth & Permissions > scope
+
+
+secrets for repo
+- BOT
+- URL
