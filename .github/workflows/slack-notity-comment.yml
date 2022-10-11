@@ -1,20 +1,27 @@
-on: pull_request
+on:  
+  discussion_comment:
+  issue_comment:
+   types: [created, deleted]
 
 jobs:
-  example_comment_pr:
+  pr_commented:
+    # This job only runs for pull request comments
+    name: PR comment
+    if: ${{ github.event.issue.pull_request }}
     runs-on: ubuntu-latest
-    name: An example job to comment a PR
     steps:
+      - run: |
+          echo A comment on PR $NUMBER
+        env:
+          NUMBER: ${{ github.event.issue.number }}
 
-      - name: Comment PR
-        uses: thollander/actions-comment-pull-request@v1
-        with:
-          message: 'Loading ...'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Edit PR comment
-        uses: thollander/actions-comment-pull-request@v1
-        with:
-          message: 'Content loaded ! (edited)'
-          comment_includes: 'Loading'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  issue_commented:
+    # This job only runs for issue comments
+    name: Issue comment
+    if: ${{ !github.event.issue.pull_request }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo A comment on issue $NUMBER
+        env:
+          NUMBER: ${{ github.event.issue.number }}
