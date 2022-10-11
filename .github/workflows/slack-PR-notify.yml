@@ -2,8 +2,7 @@ name: PR - Send notification to slack while updating repo
 
 on:
   pull_request:
-  #push:
-    branches:
+   branches:
       - master
       
 jobs:
