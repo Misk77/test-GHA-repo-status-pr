@@ -68,17 +68,7 @@ jobs:
                 ]
               }
             ]
-            {
-              "text": "HEJ"
-              {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "HEJ igen"
-                }
-              }
-            ] 
-            }
+           }
           }
       env:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
