@@ -2,35 +2,10 @@ name: PR - Send notification to slack while updating repo
 
 on:
   pull_request:
-  discussion_comment:
-  issue_comment:
-   types: [created, deleted]
    branches:
       - master
       
 jobs:
-  pr_commented:
-    # This job only runs for pull request comments
-    name: PR comment
-    if: ${{ github.event.issue.pull_request }}
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo A comment on PR $NUMBER
-        env:
-          NUMBER: ${{ github.event.issue.number }}
-
-  issue_commented:
-    # This job only runs for issue comments
-    name: Issue comment
-    if: ${{ !github.event.issue.pull_request }}
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo A comment on issue $NUMBER
-        env:
-          NUMBER: ${{ github.event.issue.number }}
-          
   PR-review:
     name: Review the PR
     runs-on: ubuntu-22.04

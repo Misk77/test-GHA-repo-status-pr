@@ -1,7 +1,8 @@
 on:  
   discussion_comment:
   issue_comment:
-   types: [created, deleted]
+  discussion:
+   types: [created, edited, answered]
 
 jobs:
   pr_commented:
