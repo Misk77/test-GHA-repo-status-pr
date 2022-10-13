@@ -14,16 +14,16 @@ on:
 jobs:
   example_comment_pr:
     runs-on: ubuntu-latest
-    name: comment in PR
-    
+    name: An example job to comment a PR
     steps:
+      
     - name: Comment PR
       uses: thollander/actions-comment-pull-request@v1
       with:
-        message: ${{ github.event.pull_request_issue_comment }}
+        message: 'Loading ... *Created by:* <${{ github.event.pull_request.user.login }}>",  '
     
     - name: Edit PR comment
       uses: thollander/actions-comment-pull-request@v1
       with:
-        message: 'Content loaded ! (edited)'
+        message: 'Content loaded ! (edited)*Created by:* <${{ github.event.pull_request.user.login }}>", '
         comment_includes: 'Loading'
