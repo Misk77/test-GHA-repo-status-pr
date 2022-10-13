@@ -1,8 +1,14 @@
 on:  
-  discussion_comment:
+  issues:
+    types: [opened, edited]
   issue_comment:
-  discussion:
-   types: [created, edited, answered]
+    types: [created, edited]
+  pull_request:
+    types: [opened, reopened, edited, closed, review_requested]
+  pull_request_review:
+    types: [submitted]
+  pull_request_review_comment:
+    types: [created, edited]
 
 jobs:
   pr_commented:
