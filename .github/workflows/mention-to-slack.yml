@@ -1,4 +1,3 @@
-name: thollander/actions-comment-pull-request@v1 
 on:  
   issues:
     types: [opened, edited]
@@ -16,32 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     name: An example job to comment a PR
     steps:
-      
-    - name: Comment PR
-      uses: thollander/actions-comment-pull-request@v1
-      with:
-        message: 
-           |
-            {
-              "text": "@Michel PR for Review - GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>",
-              "blocks": [
-              {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "@Michel PR for Review GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>"
-                }
-              }
-            ] 
-            }
-    
-    - name: Edit PR comment
-      uses: thollander/actions-comment-pull-request@v1
-      with:
-        message: 'Content loaded ! (edited)*Created by:* <${{ github.event.pull_request.user.login }}> '
-        comment_includes: 'Loading'
-        
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    env:
-            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-            SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@v1
+        with:
+          message: |
+             Comment in  PR
