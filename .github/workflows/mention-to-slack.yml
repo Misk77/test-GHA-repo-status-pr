@@ -21,13 +21,13 @@ jobs:
           with:
             payload: |
               {
-                "text": "@Michel COMMENT in PR ${{ github.event.pull_request.comment }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>",
+                "text": "@Michel COMMENT in PR ${{ github.event.pull_request.review.comment }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>",
                 "blocks": [
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "@Michel COMMENT in PR ${{ github.event.pull_request.comment }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>"
+                    "text": "@Michel COMMENT in PR ${{ github.event.pull_request.review.comment }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>"
                   }
                 }
               ] 
