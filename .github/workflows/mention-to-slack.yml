@@ -11,16 +11,15 @@ on:
     types: [created, edited]
 
 jobs:
-  mention-to-slack:
+  example_comment_pr:
     runs-on: ubuntu-latest
+    name: An example job to comment a PR
     steps:
-      - name: Mention to Slack Actions
-        uses: Laurenfrost/mention-to-slack@latest
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@v1
         with:
-          configuration-path: .github/workflows/mention-to-slack.yml
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
-          icon-url: https://github.githubassets.com/images/modules/logos_page/Octocat.png
-          bot-name: ${{github.repository}}
-          run-id: ${{ github.run_id }}
-          debug-flag: false
+          message: |
+            Hello world ! :wave:
