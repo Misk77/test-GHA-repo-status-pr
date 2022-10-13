@@ -15,15 +15,23 @@ jobs:
     runs-on: ubuntu-latest
     name: An example job to comment a PR
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Comment PR
-        uses: thollander/actions-comment-pull-request@v1
-        with:
-          message: |
-             Comment in  PR
-
-    env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+        - name: Coment PR Send custom JSON data to Slack workflow
+          id: slack
+          uses: slackapi/slack-github-action@v1.18.0
+          with:
+            payload: |
+              {
+                "text": "@Michel COMMENT in PR ${{ github.event.pull_request.comment }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>",
+                "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "@Michel COMMENT in PR ${{ github.event.pull_request.comment }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>"
+                  }
+                }
+              ] 
+              }
+          env:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+            SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
