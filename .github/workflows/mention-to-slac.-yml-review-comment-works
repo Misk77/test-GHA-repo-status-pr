@@ -1,3 +1,4 @@
+name: Laurenfrost/mention-to-slack@latest
 on:  
   issues:
     types: [opened, edited]
