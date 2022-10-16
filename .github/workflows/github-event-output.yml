@@ -34,8 +34,8 @@ jobs:
         # This data can be any valid JSON from a previous step in the GitHub Action
         payload: |
           {
-            "text": "${{ pull_request_review.comments }}\",
-            "pull_request_review": "comments"
+            "text": "${{ pull_request_review.comments }}",
+            
           }
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
