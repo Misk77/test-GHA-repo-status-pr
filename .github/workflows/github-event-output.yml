@@ -10,7 +10,7 @@ on:
   pull_request_review_comment:
     types: [created, edited]
 
-   
+
 jobs:
   printJob:    
     name: Print event
@@ -21,3 +21,21 @@ jobs:
         GITHUB_CONTEXT: ${{ toJson(github) }}
       run: |
         echo "$GITHUB_CONTEXT"
+   
+  PR-review:
+    name: Review the PR
+    runs-on: ubuntu-22.04
+    
+    steps:
+    - name: Send custom JSON data to Slack workflow
+      id: slack
+      uses: slackapi/slack-github-action@v1.23.0
+      with:
+        # This data can be any valid JSON from a previous step in the GitHub Action
+        payload: |
+          {
+            "event": "pull_request.comments",
+            "pull_request_review": "comments"
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
