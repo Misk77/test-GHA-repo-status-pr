@@ -34,7 +34,7 @@ jobs:
         # This data can be any valid JSON from a previous step in the GitHub Action
         payload: |
           {
-            "text": "pull_request.comments",
+            "text": "${{ pull_request_review.comments }}\",
             "pull_request_review": "comments"
           }
       env:
