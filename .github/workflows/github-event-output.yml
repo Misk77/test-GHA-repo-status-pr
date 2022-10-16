@@ -32,13 +32,13 @@ jobs:
       with:
         payload: |
           {
-            "text": "@Michel COMMENT PR - ${{ github.event.pull_request.html_url }}\n *Created by:* <${{ github.event.pull_request.user.login }}>",
+            "text": "@Michel COMMENT PR - ${{ github.event.pull_request_review.comment }}\n *Created by:* <${{ github.event.pull_request.user.login }}>",
             "blocks": [
             {
               "type": "section",
               "text": {
                 "type": "mrkdwn",
-                "text": "@Michel Comment PR - ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>"
+                "text": "@Michel Comment PR - ${{ job.status }}\n${{ github.event.pull_request_review.comment }} \n *Created by:* <${{ github.event.pull_request.user.login }}>"
               }
             }
           ] 
@@ -47,20 +47,20 @@ jobs:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
    
-  PR-review:
-    name: Review the PR
-    runs-on: ubuntu-22.04
+  # PR-review_comment:
+  #   name: Review the PR
+  #   runs-on: ubuntu-22.04
     
-    steps:
-    - name: Send custom JSON data to Slack workflow
-      id: slack
-      uses: slackapi/slack-github-action@v1.23.0
-      with:
-        # This data can be any valid JSON from a previous step in the GitHub Action
-        payload: |
-          {
-            "text": "${{ pull_request_review.comment}}"
+  #   steps:
+  #   - name: Send custom JSON data to Slack workflow
+  #     id: slack
+  #     uses: slackapi/slack-github-action@v1.23.0
+  #     with:
+  #       # This data can be any valid JSON from a previous step in the GitHub Action
+  #       payload: |
+  #         {
+  #           "text": "${{ pull_request_review.comment }}"
             
-          }
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  #         }
+  #     env:
+  #       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
