@@ -1,0 +1,37 @@
+on:  
+  issues:
+    types: [opened, edited]
+  issue_comment:
+    types: [created, edited]
+  pull_request:
+    types: [opened, reopened, edited, closed, review_requested]
+  pull_request_review:
+    types: [submitted]
+  pull_request_review_comment:
+    types: [created, edited]
+
+jobs:
+  example_comment_pr:
+    runs-on: ubuntu-latest
+    name: An example job to comment a PR
+    steps:
+        - name: Coment PR Send custom JSON data to Slack workflow
+          id: slack
+          uses: slackapi/slack-github-action@v1.18.0
+          with:
+            payload: |
+              {
+                "text": "@Michel COMMENT in PR ${{ github.event.pull_request.review.comment.ouputs }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>",
+                "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "@Michel COMMENT in PR ${{ github.event.pull_request.review.comment.ouputs }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>"
+                  }
+                }
+              ] 
+              }
+          env:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+            SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
