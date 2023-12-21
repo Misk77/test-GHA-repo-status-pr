@@ -17,13 +17,13 @@ jobs:
         with:
           payload: |
             {
-              "text": "@Michel  test -3 PR for Review - GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>",
+              "text": "@Michel .github/workflows/slack-PR-notify.yml PR for Review - GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>",
               "blocks": [
               {
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": "@Michel PR for Review GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>"
+                  "text": "@Michel .github/workflows/slack-PR-notify.yml PR for Review GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>"
                 }
               }
             ] 
